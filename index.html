@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Белая ночь — ресторан северной кухни</title>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#07121a;--bg2:#0c1d29;--card:rgba(255,255,255,.045);--line:rgba(255,235,200,.14);--text:#f3ead9;--mut:#9fb0b8;--gold:#e8c27a;--teal:#4fb8b0;--rose:#d98a7a}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(232,194,122,.13),transparent 65%);transform:translate(-50%,-50%);left:-999px;top:-999px;transition:left .35s ease-out,top .35s ease-out}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 6vw 18px;transition:.5s}
+nav.s{background:rgba(7,18,26,.78);backdrop-filter:blur(14px);padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:12px;border-bottom:1px solid var(--line)}
+.logo{font-size:22px;letter-spacing:.18em;text-transform:uppercase}.logo i{color:var(--gold);font-style:normal}
+nav ul{display:flex;gap:34px;list-style:none;font:13px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+nav ul a{position:relative;padding:4px 0;transition:.3s}nav ul a:hover{color:var(--text)}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .4s}nav ul a:hover::after{width:100%}
+.btn{display:inline-block;font:13px system-ui;letter-spacing:.16em;text-transform:uppercase;padding:15px 34px;border:1px solid var(--gold);color:var(--gold);border-radius:60px;background:transparent;cursor:pointer;transition:.45s;position:relative;overflow:hidden}
+.btn:hover{background:var(--gold);color:#1a1205;box-shadow:0 10px 40px -10px rgba(232,194,122,.7)}
+.btn.f{background:var(--gold);color:#1a1205}.btn.f:hover{background:#f6dca5}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 6vw 80px;position:relative;overflow:hidden;background:linear-gradient(180deg,#07121a,#0a1b27 60%,var(--bg))}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:float 18s ease-in-out infinite}
+.b1{width:46vw;height:46vw;background:#1f6f73;left:-10vw;top:-8vw}
+.b2{width:38vw;height:38vw;background:#6b3f6e;right:-8vw;top:10vh;animation-delay:-6s;opacity:.38}
+.b3{width:30vw;height:30vw;background:#b88a45;left:35vw;bottom:-14vw;animation-delay:-11s;opacity:.3}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(5vw,4vh) scale(1.12)}66%{transform:translate(-4vw,7vh) scale(.94)}}
+.ring{position:absolute;width:min(78vw,720px);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;animation:spin 60s linear infinite}
+.ring::before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
+.ring.r2{width:min(56vw,520px);animation-duration:40s;animation-direction:reverse;opacity:.7}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero>*:not(.blob):not(.ring){position:relative;z-index:2}
+.eyebrow{font:12px system-ui;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:up 1.4s .2s forwards}
+h1{font-weight:400;font-size:clamp(54px,11vw,150px);line-height:1;letter-spacing:.02em}
+h1 span{display:inline-block;opacity:0;transform:translateY(40px);filter:blur(10px);animation:up 1.6s forwards}
+h1 span:nth-child(1){animation-delay:.5s}h1 span:nth-child(2){animation-delay:.85s;font-style:italic;color:var(--gold)}
+@keyframes up{to{opacity:1;transform:none;filter:none}}
+.sub{max-width:520px;margin:28px 0 40px;color:var(--mut);font-size:19px;opacity:0;animation:up 1.4s 1.4s forwards}
+.cta{opacity:0;animation:up 1.4s 1.7s forwards;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.scroll{position:absolute;bottom:28px;left:50%;width:1px;height:56px;background:linear-gradient(var(--gold),transparent);animation:pulse 2.4s ease-in-out infinite;z-index:2}
+@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.5);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+section{padding:120px 6vw;position:relative;z-index:1}
+.lab{font:12px system-ui;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+h2{font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:1.1;margin-bottom:28px}h2 em{color:var(--gold)}
+.rv{opacity:0;transform:translateY(46px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1200px;margin:auto}
+.about p{color:var(--mut);font-size:18px;margin-bottom:18px}
+.art{aspect-ratio:4/5;border-radius:200px 200px 24px 24px;background:radial-gradient(circle at 50% 30%,#f0d49a,#c98f4f 18%,transparent 19%),radial-gradient(ellipse at 50% 100%,#12363f,#0a1d28 70%);border:1px solid var(--line);position:relative;overflow:hidden}
+.art::before,.art::after{content:"";position:absolute;left:-20%;right:-20%;height:40%;border-radius:50%;background:rgba(79,184,176,.18);animation:wave 9s ease-in-out infinite}
+.art::before{bottom:-14%}.art::after{bottom:-24%;background:rgba(232,194,122,.12);animation-delay:-4s}
+@keyframes wave{50%{transform:translateX(8%) translateY(-6%)}}
+.nums{display:flex;gap:40px;margin-top:34px}.nums b{display:block;font-size:44px;font-weight:400;color:var(--gold)}.nums span{font:12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.menu{background:linear-gradient(180deg,var(--bg),var(--bg2),var(--bg))}
+.wrap{max-width:1200px;margin:auto}
+.tabs{display:flex;gap:10px;margin-bottom:44px;flex-wrap:wrap}
+.tab{font:13px system-ui;letter-spacing:.12em;text-transform:uppercase;padding:11px 26px;border-radius:50px;border:1px solid var(--line);background:none;color:var(--mut);cursor:pointer;transition:.4s}
+.tab.on,.tab:hover{border-color:var(--gold);color:var(--gold)}.tab.on{background:rgba(232,194,122,.09)}
+.list{display:none;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}.list.on{display:grid}
+.dish{display:flex;gap:20px;align-items:center;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:22px;transition:.5s;animation:fade .8s both}
+.dish:hover{transform:translateY(-6px);border-color:rgba(232,194,122,.5);background:rgba(232,194,122,.06)}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}}
+.pl{flex:none;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--c1),var(--c2));box-shadow:inset 0 0 0 7px rgba(255,255,255,.06),0 10px 30px -8px var(--c2);transition:.6s}
+.dish:hover .pl{transform:rotate(25deg) scale(1.08)}
+.dish h3{font-weight:400;font-size:21px}.dish p{font:14px/1.5 system-ui;color:var(--mut);margin-top:4px}.dish .pr{margin-left:auto;color:var(--gold);font-size:20px;white-space:nowrap}
+.quote{text-align:center;padding:150px 6vw;background:radial-gradient(ellipse at center,rgba(79,184,176,.14),transparent 65%)}
+.quote p{font-size:clamp(26px,4.6vw,56px);font-style:italic;max-width:900px;margin:auto;line-height:1.25}.quote small{display:block;margin-top:26px;font:12px system-ui;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+.res{max-width:760px;margin:auto;text-align:center}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;text-align:left}
+.form input,.form select{width:100%;padding:17px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px;color:var(--text);font:16px system-ui;transition:.35s;color-scheme:dark}
+.form input:focus,.form select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(232,194,122,.12)}
+.form .btn{grid-column:1/-1;justify-self:center;margin-top:10px}
+.ok{grid-column:1/-1;text-align:center;color:var(--teal);font:15px system-ui;height:20px;opacity:0;transition:.6s}.ok.on{opacity:1}
+footer{padding:70px 6vw 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:34px;color:var(--mut);font:15px/1.8 system-ui;position:relative;z-index:1}
+footer b{display:block;font:12px system-ui;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:400}
+.copy{grid-column:1/-1;text-align:center;font-size:12px;opacity:.6}
+@media(max-width:800px){nav ul{display:none}.about{grid-template-columns:1fr;gap:40px}.art{max-width:360px;margin:auto}.form{grid-template-columns:1fr}section{padding:80px 6vw}.dish .pr{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.eyebrow,.sub,.cta,h1 span{opacity:1;transform:none;filter:none}}
+.view{display:none}.view.on{display:block}
+.st{padding:150px 6vw 40px;max-width:900px;margin:auto;position:relative;z-index:1}
+.ch{margin:0 0 90px}.ch .n{font:12px system-ui;letter-spacing:.4em;color:var(--gold);margin-bottom:14px}.ch p{font-size:clamp(22px,3.4vw,34px);line-height:1.45}.ch p em{color:var(--gold)}
+.toy{text-align:center;padding:0 6vw 120px;position:relative;z-index:1}
+.gl{width:210px;cursor:pointer;display:block;margin:20px auto 0;animation:bob 3.4s ease-in-out infinite;transition:filter .3s;-webkit-tap-highlight-color:transparent;background:none;border:0}
+@keyframes bob{50%{transform:translateY(-12px) rotate(-2deg)}}
+.gl:hover{filter:drop-shadow(0 0 30px rgba(232,194,122,.45))}
+.gl .liq{transform:translateY(160px);transition:transform 1.6s cubic-bezier(.3,.8,.3,1)}.gl.on .liq{transform:none}
+.gl .bb{opacity:0}.gl.on .bb{animation:bub 3s infinite}.bb:nth-child(2){animation-delay:.7s!important}.bb:nth-child(3){animation-delay:1.4s!important}
+@keyframes bub{0%{opacity:0;transform:translateY(0)}20%{opacity:.8}100%{opacity:0;transform:translateY(-110px)}}
+.gl .s2{opacity:0}.gl.on .s2{opacity:1}.gl.on .s1{opacity:0}
+.hint{margin-top:18px;font:13px system-ui;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);animation:pl2 2s infinite}@keyframes pl2{50%{opacity:.35}}
+.comp{min-height:110px;max-width:560px;margin:30px auto 0;font-size:clamp(22px,3.4vw,30px);font-style:italic;line-height:1.4;opacity:0;transform:translateY(14px);transition:.8s}.comp.on{opacity:1;transform:none}
+nav ul{gap:24px}
+.zone{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin:40px 0 60px}
+.zc{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--card);transition:.5s}.zc:hover{transform:translateY(-8px);border-color:rgba(232,194,122,.5)}
+.sc{height:200px;position:relative;overflow:hidden}.sc::before{content:"";position:absolute;inset:-30%;animation:br 6s ease-in-out infinite alternate}
+.f1{background:#1c0f0a}.f1::before{background:radial-gradient(circle at 50% 80%,#ff9a3c,#b3401f 30%,transparent 62%)}
+.f2{background:#061a24}.f2::before{background:radial-gradient(ellipse at 30% 60%,#4fb8b0,transparent 55%),radial-gradient(ellipse at 75% 40%,#2c6f9c,transparent 55%)}
+.f3{background:#0d0a1a}.f3::before{background:radial-gradient(circle at 25% 30%,#e8c27a 0 3px,transparent 4px),radial-gradient(circle at 70% 55%,#e8c27a 0 3px,transparent 4px),radial-gradient(circle at 50% 75%,#f6dca5 0 2px,transparent 3px),radial-gradient(circle at 50% 50%,rgba(107,63,110,.7),transparent 60%)}
+@keyframes br{from{transform:scale(1) translateY(0);opacity:.7}to{transform:scale(1.15) translateY(-3%);opacity:1}}
+.zc .t{padding:22px}.zc h3{font-weight:400;font-size:24px}.zc p{font:14px/1.6 system-ui;color:var(--mut);margin-top:6px}.zc small{display:block;margin-top:12px;font:12px system-ui;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.av{width:150px;height:150px;border-radius:50%;margin:0 0 30px;background:radial-gradient(circle at 35% 30%,#f0d49a,#b8803c);display:flex;align-items:center;justify-content:center;font-size:72px;color:#1a1205;font-style:italic;box-shadow:0 0 0 10px rgba(232,194,122,.1),0 0 60px rgba(232,194,122,.3);animation:bob 5s ease-in-out infinite}
+</style>
+</head>
+<body>
+<div class="glow" id="glow"></div>
+<nav id="nav"><a class="logo" href="#">Белая <i>ночь</i></a>
+<ul><li><a href="#about">О нас</a></li><li><a href="#story">История</a></li><li><a href="#chef">Шеф</a></li><li><a href="#hall">Залы</a></li><li><a href="#menu">Меню</a></li><li><a href="#book">Бронь</a></li><li><a href="#contacts">Контакты</a></li></ul>
+<a class="btn" href="#book" style="padding:10px 24px">Забронировать</a></nav>
+
+<main class="view on" data-v="home" id="vh"><header class="hero">
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="ring"></div><div class="ring r2"></div>
+<div class="eyebrow">Ресторан северной кухни · Архангельск</div>
+<h1><span>Белая</span> <span>ночь</span></h1>
+<p class="sub">Вкус Севера при мягком свете. Рыба из холодных морей, лесные травы и неспешный вечер.</p>
+<div class="cta"><a class="btn f" href="#book">Забронировать стол</a><a class="btn" href="#menu">Смотреть меню</a><a class="btn" href="#story">Наша история</a></div>
+<div class="scroll"></div>
+</header>
+
+<section id="about"><div class="about">
+<div class="rv"><div class="lab">О ресторане</div><h2>Север, который <em>хочется</em> попробовать</h2>
+<p>Мы готовим из того, что даёт наш край: беломорская сёмга, мороженая клюква, ржаной хлеб на закваске, грибы и ягоды из лесов Поморья.</p>
+<p>Живой огонь, тёплое дерево и приглушённый свет. Здесь вечер длится столько, сколько захочется.</p>
+<div class="nums"><div><b data-n="12">0</b><span>лет вкуса</span></div><div><b data-n="48">0</b><span>блюд в меню</span></div><div><b data-n="4">0</b><span>сезонных меню</span></div></div></div>
+<div class="art rv"></div></div></section>
+
+</main><main class="view" data-v="menu"><section class="menu" id="menu"><div class="wrap">
+<div class="rv"><div class="lab">Меню</div><h2>Что мы <em>подаём</em></h2></div>
+<div class="tabs rv"><button class="tab on" data-t="a">Закуски</button><button class="tab" data-t="b">Горячее</button><button class="tab" data-t="c">Десерты</button></div>
+<div class="list on" id="a">
+<div class="dish" style="--c1:#f2a58b;--c2:#c4573d"><div class="pl"></div><div><h3>Сёмга слабой соли</h3><p>Хлеб на закваске, сливочный крем, укроп</p></div><div class="pr">690 ₽</div></div>
+<div class="dish" style="--c1:#d9c8a0;--c2:#8a6d3b"><div class="pl"></div><div><h3>Грибной жюльен</h3><p>Белые грибы, сливки, пряный сыр</p></div><div class="pr">520 ₽</div></div>
+<div class="dish" style="--c1:#c9e0a4;--c2:#4f7a38"><div class="pl"></div><div><h3>Салат с морской капустой</h3><p>Свежие овощи, кедровые орехи, лимон</p></div><div class="pr">480 ₽</div></div>
+<div class="dish" style="--c1:#f0c9a8;--c2:#a05a3b"><div class="pl"></div><div><h3>Паштет из печени трески</h3><p>Ржаные гренки, маринованный лук</p></div><div class="pr">560 ₽</div></div></div>
+<div class="list" id="b">
+<div class="dish" style="--c1:#f7b38a;--c2:#c0552e"><div class="pl"></div><div><h3>Стейк из сёмги</h3><p>Овощи на гриле, соус из белого вина</p></div><div class="pr">1 350 ₽</div></div>
+<div class="dish" style="--c1:#e3b9a0;--c2:#7c3f33"><div class="pl"></div><div><h3>Оленина с брусникой</h3><p>Пюре из корнеплодов, ягодный соус</p></div><div class="pr">1 690 ₽</div></div>
+<div class="dish" style="--c1:#f1dba2;--c2:#b58a38"><div class="pl"></div><div><h3>Уха по-поморски</h3><p>Три вида рыбы, на костре, с хлебом</p></div><div class="pr">790 ₽</div></div>
+<div class="dish" style="--c1:#d8d0c0;--c2:#6c6354"><div class="pl"></div><div><h3>Треска на пару</h3><p>Картофель с зеленью, сливочный соус</p></div><div class="pr">1 150 ₽</div></div></div>
+<div class="list" id="c">
+<div class="dish" style="--c1:#e7a0b8;--c2:#8c2f58"><div class="pl"></div><div><h3>Морошковый чизкейк</h3><p>Нежный крем, песочная основа</p></div><div class="pr">490 ₽</div></div>
+<div class="dish" style="--c1:#f4d9a8;--c2:#b0793a"><div class="pl"></div><div><h3>Северные пряники</h3><p>С мёдом и ягодным конфи</p></div><div class="pr">390 ₽</div></div>
+<div class="dish" style="--c1:#f1b3bd;--c2:#a53a55"><div class="pl"></div><div><h3>Клюквенный морс и парфе</h3><p>Лёгкий десерт с кислинкой</p></div><div class="pr">420 ₽</div></div></div>
+</div></section>
+
+</main><main class="view on" data-v="home"><div class="quote"><div class="rv"><p>«Когда солнце не садится, ужин не должен заканчиваться».</p><small>Философия ресторана</small></div></div>
+
+<section id="book"><div class="res rv"><div class="lab">Бронь</div><h2>Ваш стол <em>ждёт</em></h2><p style="color:var(--mut)">Оставьте заявку, и мы перезвоним в течение 15 минут.</p>
+<div class="form"><input id="nm" placeholder="Ваше имя"><input id="ph" placeholder="Телефон" type="tel"><input type="date"><select><option>2 гостя</option><option>3–4 гостя</option><option>5–8 гостей</option><option>Банкет</option></select>
+<button class="btn f" id="go">Забронировать</button><div class="ok" id="ok">Заявка принята (демо). Спасибо!</div></div></div></section>
+
+</main>
+<main class="view" data-v="story" id="vs">
+<div class="st"><div class="lab rv">История</div><h2 class="rv">Легенда <em>белой ночи</em></h2>
+<div class="ch rv"><div class="n">I</div><p>В одном северном городе жила ночь, которая никак не могла наступить. Солнце касалось воды и <em>поднималось снова</em>.</p></div>
+<div class="ch rv"><div class="n">II</div><p>Люди перестали спать и стали собираться у огня: смеяться, рассказывать, делиться хлебом. Так появились <em>самые долгие ужины</em>.</p></div>
+<div class="ch rv"><div class="n">III</div><p>Повар Ефим сделал для этих вечеров маленький стеклянный стакан. Он наполнялся не водой, а <em>добрым словом</em>.</p></div>
+<div class="ch rv"><div class="n">IV</div><p>Говорят, стакан живёт здесь и сейчас. Он стесняется, но стоит его нажать…</p></div></div>
+<div class="toy rv">
+<svg class="gl" id="gl" viewBox="0 0 200 260" role="button" aria-label="Нажми на меня"><defs><clipPath id="cp"><path d="M40 40H160L148 228Q147 246 130 246H70Q53 246 52 228Z"/></clipPath><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0d49a"/><stop offset="1" stop-color="#c98f4f"/></linearGradient></defs>
+<path d="M40 40H160L148 228Q147 246 130 246H70Q53 246 52 228Z" fill="rgba(255,255,255,.07)"/>
+<g clip-path="url(#cp)"><g class="liq"><rect x="30" y="80" width="140" height="180" fill="url(#lg)" opacity=".92"/><ellipse cx="100" cy="80" rx="70" ry="6" fill="#f6dca5"/></g><g><circle class="bb" cx="72" cy="225" r="5" fill="#fff"/><circle class="bb" cx="100" cy="225" r="4" fill="#fff"/><circle class="bb" cx="130" cy="225" r="6" fill="#fff"/></g></g>
+<path d="M40 40H160L148 228Q147 246 130 246H70Q53 246 52 228Z" fill="none" stroke="#e8c27a" stroke-width="3"/>
+<circle cx="80" cy="125" r="7" fill="#1a1205"/><circle cx="120" cy="125" r="7" fill="#1a1205"/><circle cx="68" cy="143" r="8" fill="#d98a7a" opacity=".6"/><circle cx="132" cy="143" r="8" fill="#d98a7a" opacity=".6"/>
+<path class="s1" d="M88 150Q100 158 112 150" stroke="#1a1205" stroke-width="4" fill="none" stroke-linecap="round"/><path class="s2" d="M82 146Q100 176 118 146Z" fill="#1a1205"/></svg>
+<div class="hint" id="ht">Нажми на меня</div><div class="comp" id="cm"></div>
+<div style="margin-top:50px"><a class="btn f" href="#menu">К меню</a></div></div>
+</main>
+<main class="view" data-v="chef"><div class="st"><div class="av rv">Е</div><div class="lab rv">Шеф-повар</div><h2 class="rv">Ефим <em>Северов</em></h2>
+<div class="ch rv"><p>Ефим вырос на берегу Белого моря и до сих пор помнит запах дыма, ржаного хлеба и ягод, собранных на рассвете.</p></div>
+<div class="ch rv"><p>Он считает, что хорошее блюдо не обязано быть сложным. Оно должно быть <em>честным</em>: свежая рыба, огонь и немного терпения.</p></div>
+<div class="ch rv"><p>А тот самый стеклянный стакан — его первая выдумка. «Иногда гостю нужно не только поесть. Ему нужно, чтобы его заметили».</p></div>
+<div class="lab rv">Фирменные блюда шефа</div>
+<div class="list on rv" style="margin-bottom:50px"><div class="dish" style="--c1:#f2a58b;--c2:#c4573d"><div class="pl"></div><div><h3>Сёмга слабой соли</h3><p>Первое блюдо, с которого всё началось</p></div></div><div class="dish" style="--c1:#f1dba2;--c2:#b58a38"><div class="pl"></div><div><h3>Уха на костре</h3><p>Три вида рыбы и дым берёзы</p></div></div><div class="dish" style="--c1:#e7a0b8;--c2:#8c2f58"><div class="pl"></div><div><h3>Морошковый чизкейк</h3><p>Любимый десерт самого шефа</p></div></div></div>
+<a class="btn f" href="#book">Забронировать стол</a></div></main>
+<main class="view" data-v="hall"><div class="st"><div class="lab rv">Атмосфера</div><h2 class="rv">Выбери <em>свой</em> вечер</h2><p class="rv" style="color:var(--mut);font-size:18px">Три зала, три настроения. Выбирайте то, что подходит вашему поводу.</p>
+<div class="zone rv">
+<div class="zc"><div class="sc f1"></div><div class="t"><h3>Зал у огня</h3><p>Живой камин, тёплое дерево и мягкий свет. Для семейных ужинов и долгих разговоров.</p><small>до 40 гостей</small></div></div>
+<div class="zc"><div class="sc f2"></div><div class="t"><h3>Веранда у воды</h3><p>Панорама реки и бесконечное небо белой ночи. Лучшее место для свидания.</p><small>до 24 гостей</small></div></div>
+<div class="zc"><div class="sc f3"></div><div class="t"><h3>Тихий кабинет</h3><p>Свечи, закрытая атмосфера и отдельное меню. Для особых поводов и деловых встреч.</p><small>до 12 гостей</small></div></div></div>
+<a class="btn f" href="#book">Забронировать стол</a></div></main>
+<footer id="contacts"><div><b>Адрес</b>г. Архангельск,<br>набережная Северной Двины, 1<br>(пример)</div><div><b>Часы</b>Ежедневно 12:00–00:00</div><div><b>Связь</b>+7 (900) 000-00-00<br>hello@belaya-noch.example</div><div class="copy">© Белая ночь · демо-версия сайта, данные и блюда — примеры</div></footer>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
+const g=document.getElementById('glow');
+addEventListener('pointermove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'},{passive:true});
+function count(el){const n=+el.dataset.n;let s=null;const d=1800;(function f(t){s=s||t;const p=Math.min((t-s)/d,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(count);io.unobserve(e.target)}}),{threshold:.18});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const vh=document.getElementById('vh'),vs=document.getElementById('vs');
+function route(){const h=location.hash.slice(1),k=['menu','story','chef','hall'].includes(h)?h:'home';document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.dataset.v===k));if(k!=='home')scrollTo(0,0);else if(h)setTimeout(()=>{const t=document.getElementById(h);t&&t.scrollIntoView()},40)}
+addEventListener('hashchange',route);route();
+const C=['У вас красивая улыбка. Просто вспомните об этом сегодня.','Рядом с вами вечер становится теплее.','Вам очень идёт хорошее настроение. Берегите его.','У вас отличный вкус: вы же зашли именно сюда.','Всё, что вы задумали, получится. Только не торопитесь.','Вы заслуживаете самого вкусного ужина сегодня.','Вы замечаете красоту в мелочах. Это редкий дар.','Сегодня ваш вечер. Всё остальное подождёт.'];
+let last=-1;const gl=document.getElementById('gl'),cm=document.getElementById('cm'),ht=document.getElementById('ht');
+gl.onclick=()=>{let i;do{i=Math.floor(Math.random()*C.length)}while(i===last);last=i;gl.classList.add('on');cm.classList.remove('on');setTimeout(()=>{cm.textContent=C[i];cm.classList.add('on')},400);ht.textContent='Нажми ещё раз'};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+document.querySelectorAll('.tab,.list').forEach(x=>x.classList.remove('on'));
+b.classList.add('on');const l=document.getElementById(b.dataset.t);l.classList.add('on');
+l.querySelectorAll('.dish').forEach((d,i)=>d.style.animationDelay=i*.12+'s')});
+document.getElementById('go').onclick=()=>{const o=document.getElementById('ok');o.classList.add('on');setTimeout(()=>o.classList.remove('on'),4000)};
+</script>
+</body>
+</html>
